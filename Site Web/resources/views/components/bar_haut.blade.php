@@ -14,8 +14,8 @@
                      <img src="g" alt="#">
                   </div>
                   <div class="author_name">
-                     <h4 class="f_s_15 f_w_500 mb-0">Jiue Anderson</h4>
-                     <p class="f_s_12 f_w_400">Manager</p>
+                     <h4 class="f_s_15 f_w_500 mb-0">{{ auth()->user()->Prenom.' '.auth()->user()->Nom }}</h4>
+                     <p class="f_s_12 f_w_400">{{ auth()->user()->Email }}</p>
                   </div>
                   <div class="profile_info_iner">
                      <div class="profile_author_name">
@@ -25,7 +25,7 @@
                      <div class="profile_info_details">
                         <a href="#">My Profile </a>
                         <a href="#">Settings</a>
-                        <a href="#">Log Out </a>
+                        <a href="{{ route('Deconnexion') }}">Log Out </a>
                      </div>
                   </div>
                </div>

@@ -17,9 +17,9 @@
                   </div>
                </a>
                <ul>
-                  <li><a href="index_2.html">Default</a></li>
-                  <li><a href="index_3.html">Light Sidebar</a></li>
-                  <li><a href="index.html">Dark Sidebar</a></li>
+                  <li><a href="{{ route('GestionFrais.ListeFrais') }}">Ma liste de frais</a></li>
+                  <li><a href="index_3.html">Déclarer une dépense</a></li>
+
                </ul>
             </li>
          </ul>

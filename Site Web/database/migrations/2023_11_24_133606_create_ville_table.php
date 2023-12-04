@@ -11,11 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('responsable', function (Blueprint $table) {
-            $table->id('Id_Utilisateur')->foreign()->references('Id_Utilisateur')->on('users');
-            $table->foreignId('Id_Utilisateur_Responsable')->foreign()->references('Id_Utilisateur')->on('users');
+        Schema::disableForeignKeyConstraints();
+        Schema::create('ville', function (Blueprint $table) {
+            $table->id('Id_Ville');
+            $table->string('CP_Ville', 5);
+            $table->string('Nom_Ville',100);
             $table->timestamps();
-        });
+        });       
+        Schema::enableForeignKeyConstraints();
     }
 
     /**
@@ -23,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('responsable');
+        Schema::dropIfExists('ville');
     }
 };

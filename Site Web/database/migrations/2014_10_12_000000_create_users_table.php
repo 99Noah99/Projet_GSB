@@ -11,6 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
+        Schema::disableForeignKeyConstraints(); //permet de désactivé la vérification des dépendances et des clés pour créer la table
         Schema::create('users', function (Blueprint $table) {
             $table->id('Id_Utilisateur');
             $table->string('Nom', 30);
@@ -18,9 +19,11 @@ return new class extends Migration
             $table->string('Email',100)->unique();
             $table->string('Identifiant',20);
             $table->string('Mdp');
-            $table->foreignId('Id_Fonction');
+            $table->foreignId('Id_Fonction')->foreign()->references('Id_Fonction')->on('fonction');
+            $table->string('remember_token',255);
             $table->timestamps();
-        });
+        });    
+        Schema::enableForeignKeyConstraints();
     }
 
     /**
