@@ -23,6 +23,7 @@ Route::get('/', function () {
 Route::get('/login', [ConnexionController::class, 'show_login'])->name('login');
 
 Route::post('/make-login', [ConnexionController::class, 'connexion'])->name('submit_login');
+
 Route::middleware('auth')->group(function () {
 
     Route::get('/gestion', function () {

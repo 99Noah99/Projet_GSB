@@ -6,12 +6,11 @@
                <i class="ti-menu"></i>
             </div>
             <div class="line_icon open_miniSide d-none d-lg-block">
-               <img src="img/line_img.png" alt>
+               <!-- <img src="img/line_img.png" alt> -->
             </div>
             <div class="header_right d-flex justify-content-between align-items-center">
                <div class="profile_info d-flex align-items-center">
                   <div class="profile_thumb mr_20">
-                     <img src="g" alt="#">
                   </div>
                   <div class="author_name">
                      <h4 class="f_s_15 f_w_500 mb-0">{{ auth()->user()->Prenom.' '.auth()->user()->Nom }}</h4>
