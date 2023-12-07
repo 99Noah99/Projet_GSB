@@ -18,8 +18,8 @@
                   </div>
                   <div class="profile_info_iner">
                      <div class="profile_author_name">
-                        <p>Manager</p>
-                        <h5>Jiue Anderson</h5>
+                        <p>{{ auth()->user()->fonction->Nom_Fonction }}</p>
+                        <h5>{{ auth()->user()->Prenom.' '.auth()->user()->Nom }}</h5>
                      </div>
                      <div class="profile_info_details">
                         <a href="#">My Profile </a>

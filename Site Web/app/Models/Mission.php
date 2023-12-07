@@ -11,6 +11,8 @@ class Mission extends Model
 
     protected $table = 'mission';
     protected $primaryKey = 'Id_Mission';
+    protected $guarded = []; // Ne proège aucune colonne, permet le create
+    protected $dates = ['Date_Debut','Date_Fin'];
 
     public function ville() {
         return $this->hasOne(Ville::class, 'Id_Ville', 'Id_Ville');

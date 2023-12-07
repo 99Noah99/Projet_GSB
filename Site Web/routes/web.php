@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ConnexionController;
 use App\Http\Controllers\GestionFraisController;
+use App\Http\Controllers\GestionMissionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,14 +17,14 @@ use App\Http\Controllers\GestionFraisController;
 */
 
 
-Route::get('/', function () {
-    return view('welcome');
-});
+
 
 Route::get('/login', [ConnexionController::class, 'show_login'])->name('login');
 
 Route::post('/make-login', [ConnexionController::class, 'connexion'])->name('submit_login');
 
+
+//Route protéger par auth (session)
 Route::middleware('auth')->group(function () {
 
     Route::get('/gestion', function () {
@@ -36,7 +37,10 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/frais/liste', [GestionFraisController::class, 'show_ListeFrais'])->name('GestionFrais.ListeFrais');
 
-
-    // ---------------------------- GESTION DE FRAIS
-
+    Route::get('/mission/create', [GestionMissionController::class, 'show_create_mission'])->name('GestionFrais.show_create_mission');
+    Route::post('/mission/create',[GestionMissionController::class, 'create_mission'])->name('GestionFrais.create_mission');
+    Route::get('/mission/recherche/ville/', [GestionMissionController::class, 'recherche_ville'])->name('GestionFrais.recherche_ville');
+    Route::get('/mission/{id}', [GestionMissionController::class, 'show_mission'])->name('GestionFrais.show_mission')->where('id', '[0-9]+');
+    Route::get('/mission/delete/{id}', [GestionMissionController::class, 'delete_mission'])->name('GestionFrais.delete_mission')->where('id', '[0-9]+');
+    Route::post('/mission/declare',[GestionMissionController::class, 'declare_mission'])->name('GestionFrais.declare_mission');
 });

@@ -44,4 +44,8 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public function fonction(){        
+        return $this->hasOne(Fonction::class, 'Id_Fonction', 'Id_Fonction');
+    }
 }

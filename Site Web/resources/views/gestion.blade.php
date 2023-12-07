@@ -1,7 +1,11 @@
 @extends('layout.app')
 
 @section('contenu')
-<div class="main_content_iner overly_inner ">
+
+Bienvenu sur GSB
+<br>
+Veuillez déclarer vos frais
+<!-- <div class="main_content_iner overly_inner ">
 <div class="container-fluid p-0 ">
 <div class="row ">
 <div class="col-12">
@@ -573,5 +577,5 @@ adipisci Quisque scelerisq.</p>
 </div>
 </div>
 </div>
-</div>
+</div> -->
 @stop

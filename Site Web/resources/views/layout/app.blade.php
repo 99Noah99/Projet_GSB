@@ -3,7 +3,7 @@
    <head>
       <meta charset="utf-8" />
       <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-      <title>BitCrypto</title>
+      <title>GSB</title>
       <!-- <link rel="icon" href="img/mini_logo.png" type="image/png"> -->
       <link rel="stylesheet" href="{{ asset('css/bootstrap1.min.css') }}" />
       <link rel="stylesheet" href="{{ asset('css/themify-icons.css') }}" />
@@ -18,6 +18,8 @@
       <link rel="stylesheet" href="{{ asset('css/style1.css') }}" />
       <link rel="stylesheet" href="{{ asset('css/default.css') }}" id="colorSkinCSS">
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+      <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
       <style>
          .border-gris{
             border: 3px solid #ccc;

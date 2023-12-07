@@ -9,8 +9,10 @@ class Historique_Statut extends Model
 {
     use HasFactory;
 
+
     protected $table = 'historique_statut';
     protected $primaryKey = 'Id_Historique';
+    protected $guarded = [];
 
 
     public function statut() {
