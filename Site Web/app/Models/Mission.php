@@ -18,6 +18,10 @@ class Mission extends Model
         return $this->hasOne(Ville::class, 'Id_Ville', 'Id_Ville');
     }
 
+    public function frais() {                
+        return $this->hasMany(Frais::class, 'Id_Frais', 'Id_Frais');
+    }
+
     public function historique_statut() {                // jointure avec table historique_statut retourne tout les enregistrements
         return $this->hasMany(Historique_Statut::class, 'Id_Mission', 'Id_Mission');
     }

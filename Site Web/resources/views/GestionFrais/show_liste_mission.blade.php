@@ -31,7 +31,7 @@
                                  <td>{{ \Carbon\Carbon::parse($mission->Date_Debut)->format('d/m/Y') }}</td>
                                  <td>{{ \Carbon\Carbon::parse($mission->Date_Fin)->format('d/m/Y') }}</td>
                                  <td>{{ $mission->ville->Nom_Ville }}</td>
-                                 <td>@if(isset($mission->dernier_historique_statut->statut->Id_Statut)) {!! \App\Http\Controllers\GestionFraisController::badge($mission->dernier_historique_statut->statut->Id_Statut) !!} @endif </td>
+                                 <td>@if(isset($mission->dernier_historique_statut->statut->Id_Statut)) {!! \App\Http\Controllers\GestionMissionController::badge($mission->dernier_historique_statut->statut->Id_Statut) !!} @endif </td>
                                  <td>
                                     <a href="{{ route('GestionFrais.show_mission', ['id' => $mission->Id_Mission]) }}"> 
                                        <button type="button" class="btn btn-primary"><i class="fa-regular fa-eye fa-xs"></i></button>

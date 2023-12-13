@@ -22,8 +22,8 @@
                   </div>
                </a>
                <ul>
-                  <li><a href="{{ route('GestionFrais.ListeFrais') }}">Ma liste de frais</a></li>
-                  <li><a href="{{ route('GestionFrais.show_create_mission') }}">Déclarer votre mission</a></li>
+                  <li><a href="{{ route('GestionFrais.ListeMission') }}">Ma liste de mission</a></li>
+                  <li><a href="{{ route('GestionFrais.show_create_mission') }}">Ajouter une mission</a></li>
 
                </ul>
             </li>

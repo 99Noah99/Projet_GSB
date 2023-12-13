@@ -20,11 +20,12 @@
 		<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"> -->
 	</head>
 	<body>
-		<h1 class="f_w_800 row justify-content-center">Bienvenue sur GSB</h1>
-
+      <div class="white_card_header">
+            <h1 class="f_w_800 row justify-content-center">Bienvenue sur GSB</h1>
+      </div>
 		<!-- <div class="white_box mb_30"> -->
 		<div class="row justify-content-center">
-			<div class="col-lg-6">
+			<div class="col-lg-5">
 				<div class="modal-content cs_modal">
 					<div class="modal-header justify-content-center theme_bg_1">
 						<h5 class="modal-title text_white">Log in</h5>

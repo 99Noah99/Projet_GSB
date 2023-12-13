@@ -5307,8 +5307,8 @@ body::-webkit-scrollbar {
 
 .QA_section .QA_table .table thead th {
 	border-bottom: 0 solid transparent;
-	padding: 15px;
-	border: 0 solid transparent;
+	padding: 10px;
+	border: 1 solid transparent;
 	font-size: 14px;
 	font-weight: 400;
 	color: #6f7a92;
@@ -5320,7 +5320,7 @@ body::-webkit-scrollbar {
 	border: 0 !important;
 	background: 0 0;
 	border-top: 1px solid #f9f9f9 !important;
-	border-bottom: 1px solid #f9f9f9 !important;
+	border-bottom: 2px solid #f9f9f9 !important;
 	position: relative
 }
 

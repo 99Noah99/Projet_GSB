@@ -35,7 +35,7 @@ Route::middleware('auth')->group(function () {
 
     // ---------------------------- GESTION DE FRAIS
 
-    Route::get('/frais/liste', [GestionFraisController::class, 'show_ListeFrais'])->name('GestionFrais.ListeFrais');
+    Route::get('/frais/liste', [GestionMissionController::class, 'show_ListeMission'])->name('GestionFrais.ListeMission');
 
     Route::get('/mission/create', [GestionMissionController::class, 'show_create_mission'])->name('GestionFrais.show_create_mission');
     Route::post('/mission/create',[GestionMissionController::class, 'create_mission'])->name('GestionFrais.create_mission');
@@ -43,4 +43,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/mission/{id}', [GestionMissionController::class, 'show_mission'])->name('GestionFrais.show_mission')->where('id', '[0-9]+');
     Route::get('/mission/delete/{id}', [GestionMissionController::class, 'delete_mission'])->name('GestionFrais.delete_mission')->where('id', '[0-9]+');
     Route::post('/mission/declare',[GestionMissionController::class, 'declare_mission'])->name('GestionFrais.declare_mission');
+    Route::get('/mission/create/frais/{id_mission}',[GestionFraisController::class, 'show_create_frais'])->name('GestionFrais.show_create_frais');
+    Route::post('/mission/create/frais',[GestionFraisController::class, 'create_frais'])->name('GestionFrais.create_frais');
+    
+
 });

@@ -4,35 +4,36 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Mission;
+use App\Models\Type_Depense;
+use App\Models\Frais;
 
 class GestionFraisController extends Controller
 {
-    public function show_ListeFrais() {
-        //\DB::enableQueryLog();
-
-        $tous_missions = Mission::with('ville', 'dernier_historique_statut.statut')->get();
-        // dd(\DB::getQueryLog());
-        // dd($tous_missions->toSql());
-        // dd($tous_missions);
-        return view('GestionFrais.show_liste_frais', [
-            'missions' => $tous_missions
+    public function show_create_frais($id_mission){
+        $tous_type_depense = Type_Depense::all();
+        return view('GestionFrais.ajout_frais', [
+            "types_depenses" => $tous_type_depense,
+            "id_mission" => $id_mission
         ]);
     }
 
-    public static function badge($statut) {
-        switch ($statut){
-            case 1 :
-                $badge = '<span class="badge rounded-pill bg-warning" style="font-size:12px">En attente de validation</span>';
-                break;
-            case 2 :
-                $badge = '<span class="badge bg-success" style="font-size:12px">Validée</span>';
-                break;
-            case 3 :
-                $badge = '<span class="badge bg-dark" style="font-size:12px">En attente de déclaration</span>';
-                break;
+    public function create_frais(){
+        $ligne_typedepense = Type_Depense::find(request()->select_TypeDepense);
+        if (request()->select_TypeDepense != 5 && request()->select_TypeDepense != 6){ //vérifie si le type de dépense est pas avion et sncf
+            $prix_total = (request()->Quantite) * $ligne_typedepense->Prix_unite; 
         }
-
-        return $badge;
+        else{
+            $prix_total = request()->Montant;
+        }
+        Frais::create([
+            "Demandeur" => auth()->user()->Id_Utilisateur,
+            "Intitule" => request()->Intitule,
+            "Prix_Total" => $prix_total,
+            "Date_Depense" => request()->Date_Depense,
+            "Id_Mission" => request()->id_mission,
+            "Id_TypeDepense" => request()->select_TypeDepense            
+        ]);
+        return redirect()->route('GestionFrais.show_mission',['id' => request()->id_mission]);
     }
 
     //Exemple pour gérer la fermuture ajout frais le 20 du mois.
@@ -48,3 +49,4 @@ class GestionFraisController extends Controller
 
 
 
+ 
