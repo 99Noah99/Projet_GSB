@@ -45,6 +45,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/mission/declare',[GestionMissionController::class, 'declare_mission'])->name('GestionFrais.declare_mission');
     Route::get('/mission/create/frais/{id_mission}',[GestionFraisController::class, 'show_create_frais'])->name('GestionFrais.show_create_frais');
     Route::post('/mission/create/frais',[GestionFraisController::class, 'create_frais'])->name('GestionFrais.create_frais');
+    Route::get('/mission/delete/frais/{id}',[GestionFraisController::class, 'delete_frais'])->name('GestionFrais.delete_frais');
     
 
 });

@@ -18,16 +18,16 @@
                             <h6 class="card-subtitle mb-2">Veuillez remplir les informations :</h6><br>
                             <div class="mb-3">
                                 <label class="form-label">Intitulé du frais</label>
-                                <input type="text" name='Intitule' class="form-control" placeholder="Intitulé du frais">
+                                <input type="text" name='Intitule' class="form-control" placeholder="Intitulé du frais" required>
                             </div>
 							<div class="mb-3">
 								<label class="form-label">Date de dépense</label>
-								<input type="date" name='Date_Depense' class="form-control" placeholder="Date de dépense">
+								<input type="date" name='Date_Depense' class="form-control" placeholder="Date de dépense" required>
 							</div>
 							<div class="mb-3">
 								<label class="form-label">Type de dépense</label>
-								<select  class="form-select" name="select_TypeDepense" id="selectOption">
-									<option selected="">Choisir son type de dépense</option>
+								<select  class="form-select" name="select_TypeDepense" id="selectOption" required>
+									<option value="" disabled selected>Choisir son type de dépense</option>
 									<?php
 									foreach ($types_depenses as $option) {
 										if($option->Nom_TypeDepense != 'avion' && $option->Nom_TypeDepense != 'sncf'){ //vérifie que le nom de la dépense n'est pas avion et sncf

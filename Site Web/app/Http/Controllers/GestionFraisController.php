@@ -36,6 +36,14 @@ class GestionFraisController extends Controller
         return redirect()->route('GestionFrais.show_mission',['id' => request()->id_mission]);
     }
 
+
+    public function delete_frais($id){
+        $frais = Frais::find($id);
+        $frais->delete();
+        return redirect()->back();
+    }
+
+    
     //Exemple pour gérer la fermuture ajout frais le 20 du mois.
     // create(){
     //     $mission_month = Carbon::($mission->created_at)->month;

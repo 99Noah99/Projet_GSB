@@ -88,8 +88,16 @@
 												</td> -->
 												<!-- <td> <img class="small_img" src="img/currency/1.svg" alt=""> Bitcoin </td> -->
 												<td>{{ $unfrais->Intitule }}</td>
-												<td>{{ $unfrais->Date_Depense }}</td>
+												<td>{{ $unfrais->Date_Depense }}</td>l
 												<td>{{ $unfrais->Prix_Total }}</td>
+												<td>
+													<!-- <a href=""> 
+														<button type="button" class="btn btn-primary"><i class="fa-regular fa-eye fa-xs"></i></button>
+													</a> -->
+													<a href="{{ route('GestionFrais.delete_frais', ['id' => $unfrais->Id_Frais]) }}"> 
+														<button type="button" class="btn btn-danger"><i class="fa-solid fa-trash fa-xs"></i></button>
+													</a>
+                                 				</td>
 											</tr>
 											@endforeach
 										</tbody>
