@@ -12,7 +12,7 @@
 							</div>
 						</div>
 					</div>
-                    <form action=" {{ route('GestionFrais.create_frais') }} " method="post">
+                    <form action=" {{ route('GestionFrais.create_frais') }} " method="post" enctype="multipart/form-data">
                         @csrf
                         <div class="white_card_body">
                             <h6 class="card-subtitle mb-2">Veuillez remplir les informations :</h6><br>
@@ -53,7 +53,7 @@
 
 							<!-- ajout du fichier -->
 							<div class="mb-3">
-								<input type="file" class="form-control" id="inputGroupFile02">
+								<input type="file" class="form-control" name="fichier" id="inputGroupFile02" required>
 							</div>
 									
 							<!-- input pour l'id mission -->

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Mission;
 use App\Models\Type_Depense;
 use App\Models\Frais;
+use Illuminate\Support\Facades\Storage;
 
 class GestionFraisController extends Controller
 {
@@ -25,13 +26,28 @@ class GestionFraisController extends Controller
         else{
             $prix_total = request()->Montant;
         }
+        
+        // Traitement du fichier
+        request()->validate([
+            'fichier' => 'required|mimes:pdf,doc,docx', // Ajoutez les extensions autorisées, permet de vérifier si le fichier est "valide"
+        ]);
+        $file = request()->fichier;
+        $originalName = $file->getClientOriginalName();
+        $extension = $file->getClientOriginalExtension();
+        $filePath = $file->store('Justificatifs_Frais', 'public');
+        $randomName= pathinfo($filePath, PATHINFO_FILENAME);
+
         Frais::create([
             "Demandeur" => auth()->user()->Id_Utilisateur,
             "Intitule" => request()->Intitule,
             "Prix_Total" => $prix_total,
             "Date_Depense" => request()->Date_Depense,
             "Id_Mission" => request()->id_mission,
-            "Id_TypeDepense" => request()->select_TypeDepense            
+            "Id_TypeDepense" => request()->select_TypeDepense,
+            "NomBase_Justificatif" => $originalName,
+            "NouveauNom_Justificatif" => $randomName,
+            "Extensions" => $extension,
+            "Chemin" => $filePath,          
         ]);
         return redirect()->route('GestionFrais.show_mission',['id' => request()->id_mission]);
     }
@@ -39,6 +55,8 @@ class GestionFraisController extends Controller
 
     public function delete_frais($id){
         $frais = Frais::find($id);
+        // dd($frais);
+        Storage::disk('public')->delete($frais->Chemin);
         $frais->delete();
         return redirect()->back();
     }
