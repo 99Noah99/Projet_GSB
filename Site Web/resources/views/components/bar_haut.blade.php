@@ -22,8 +22,8 @@
                         <h5>{{ auth()->user()->Prenom.' '.auth()->user()->Nom }}</h5>
                      </div>
                      <div class="profile_info_details">
-                        <a href="#">My Profile </a>
-                        <a href="#">Settings</a>
+                        <!-- <a href="#">My Profile </a>
+                        <a href="#">Settings</a> -->
                         <a href="{{ route('Deconnexion') }}">Log Out </a>
                      </div>
                   </div>

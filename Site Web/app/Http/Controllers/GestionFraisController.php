@@ -18,7 +18,7 @@ class GestionFraisController extends Controller
         ]);
     }
 
-    public function create_frais(){
+    public function create_frais(Request $request){
         $ligne_typedepense = Type_Depense::find(request()->select_TypeDepense);
         if (request()->select_TypeDepense != 5 && request()->select_TypeDepense != 6){ //vérifie si le type de dépense est pas avion et sncf
             $prix_total = (request()->Quantite) * $ligne_typedepense->Prix_unite; 
@@ -34,7 +34,7 @@ class GestionFraisController extends Controller
         $file = request()->fichier;
         $originalName = $file->getClientOriginalName();
         $extension = $file->getClientOriginalExtension();
-        $filePath = $file->store('Justificatifs_Frais', 'public');
+        $filePath = $file->store('/', 'Justificatifs_Frais');
         $randomName= pathinfo($filePath, PATHINFO_FILENAME);
 
         Frais::create([

@@ -3,7 +3,7 @@
 	<head>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<title>Document</title>
+		<title>GSB</title>
 		<link rel="icon" href="img/mini_logo.png" type="image/png">
 		<link rel="stylesheet" href="{{ asset('css/bootstrap1.min.css') }}" />
 		<link rel="stylesheet" href="{{ asset('css/themify-icons.css') }}" />
@@ -40,22 +40,15 @@
 								<input type="password" name="password" class="form-control" placeholder="Mot de passe">
 							</div>
 							<button type="submit" class="btn_1 full_width text-center">Se connecter</button>
-							<!-- <p>Besoin d'un compte ? <a data-bs-toggle="modal" data-bs-target="#sing_up" data-bs-dismiss="modal" href="#"> Sign Up</a></p>
-								<div class="text-center">
-								   <a href="#" data-bs-toggle="modal" data-bs-target="#forgot_password" data-bs-dismiss="modal" class="pass_forget_btn">Forget Password?</a>
-								</div> -->
+							<p>
+								<a data-bs-toggle="modal" data-bs-target="#sing_up" data-bs-dismiss="modal" href="{{ route('show_create_account') }}"> 
+								Créer un compte
+								</a>
+							</p>
 						</form>
 					</div>
 				</div>
 			</div>
 		</div>
-		<!-- </div> -->
-		<!-- ancien formulaire de connexion -->
-		<!-- <form action="{{ route('submit_login') }}"  method="post">
-			@csrf
-			<input type="text" name="username"> <br>
-			<input type="password" name="password"> <br>
-			<button type="submit">Se connecter</button>
-			</form> -->
 	</body>
 </html>

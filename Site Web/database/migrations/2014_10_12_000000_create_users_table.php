@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('Identifiant',20);
             $table->string('Mdp');
             $table->foreignId('Id_Fonction')->foreign()->references('Id_Fonction')->on('fonction');
-            $table->string('remember_token',255);
+            $table->string('remember_token',255)->nullable();
             $table->timestamps();
         });    
         Schema::enableForeignKeyConstraints();

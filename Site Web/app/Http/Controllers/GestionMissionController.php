@@ -12,16 +12,19 @@ use Carbon\Carbon;
 class GestionMissionController extends Controller
 {
     public function show_ListeMission() {
-        //\DB::enableQueryLog();
-
         $tous_missions = Mission::with('ville', 'dernier_historique_statut.statut','frais')->where('Id_Utilisateur',auth()->user()->Id_Utilisateur)->get();
-        // dd(\DB::getQueryLog());
-        // dd($tous_missions->toSql());
-        // dd($tous_missions);
         return view('GestionFrais.show_liste_mission', [
             'missions' => $tous_missions
         ]);
     }
+
+    // public function show_ListeMission_ParVisiteur($id)
+    // {
+    //     $tous_missions = Mission::with('ville', 'dernier_historique_statut.statut','frais')->where('Id_Utilisateur',$id)->get();
+    //     return view('GestionFrais.show_liste_mission', [
+    //         'missions' => $tous_missions
+    //     ]);
+    // }
 
 
     public static function badge($statut) {

@@ -9,11 +9,13 @@
 						<h3 class="mb-0">Mission : {{ $mission->Nom_Mission }}</h3>
 					</div>
 					<div class="page_title_right">
+						@if ($mission->dernier_historique_statut->statut->Id_Statut == 3)
 						<form action="{{ route('GestionFrais.declare_mission') }}" method="post">
 							@csrf
 							<input type="hidden" name="id" value="{{ $mission->Id_Mission }}">
 							<button type="submit" class="btn btn-primary">Déclarer la mission</button>
 						</form>
+						@endif
 					</div>
 				</div>
 			</div>
@@ -35,13 +37,7 @@
 								<div class="single_analite_content">
 									<h4>Frais totaux remboursés</h4>
 									<h3>
-										<?php
-											$nbfrais = 0;
-											foreach($frais as $unfrais) {
-												$nbfrais += $unfrais->Prix_Total;
-											}
-											echo $nbfrais . " €";
-										?>
+										{{ number_format($frais->sum('Prix_Total'), 2, ',', ' ') . ' €' }}
 									</h3>
 								</div>
 							</div>
@@ -94,7 +90,7 @@
 											<tr>
 												<td>{{ $unfrais->Intitule }}</td>
 												<td>{{ $unfrais->Date_Depense }}</td>
-												<td>{{ $unfrais->Prix_Total }}</td>
+												<td>{{ number_format($unfrais->Prix_Total, 2, ',', ' ') . ' €' }}</td>
 												<td>
 													<a href="{{ route('GestionFrais.delete_frais', ['id' => $unfrais->Id_Frais]) }}"> 
 														<button type="button" class="btn btn-danger"><i class="fa-solid fa-trash fa-xs"></i></button>
@@ -133,6 +129,7 @@
 								<tbody>
 									
 									@foreach($frais as $unfrais)
+									@if(!empty($unfrais->NomBase_Justificatif))
 									<tr>
 										<td>
 											{{ $unfrais->NomBase_Justificatif }}
@@ -143,6 +140,7 @@
 											</a>
 										</td>
 									</tr>
+									@endif
 									@endforeach
 								</tbody>
 							</table>

@@ -36,6 +36,12 @@ return [
             'throw' => false,
         ],
 
+        'Justificatifs_Frais' => [
+            'driver' => 'local',
+            'root' => storage_path('app/Justificatifs_Frais'),
+            'throw' => false,
+        ],
+
         'public' => [
             'driver' => 'local',
             'root' => storage_path('app/public'),
