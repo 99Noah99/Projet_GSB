@@ -61,6 +61,12 @@ class GestionFraisController extends Controller
         return redirect()->back();
     }
 
+
+    public function donwload_document($id){
+        $frais = Frais::find($id);
+        return Storage::disk('public')->download($frais->Chemin, $frais->NomBase_Justificatif);
+    }
+
     
     //Exemple pour gérer la fermuture ajout frais le 20 du mois.
     // create(){

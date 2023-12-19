@@ -24,20 +24,18 @@
 								<label class="form-label">Date de dépense</label>
 								<input type="date" name='Date_Depense' class="form-control" placeholder="Date de dépense" required>
 							</div>
+
 							<div class="mb-3">
 								<label class="form-label">Type de dépense</label>
 								<select  class="form-select" name="select_TypeDepense" id="selectOption" required>
 									<option value="" disabled selected>Choisir son type de dépense</option>
-									<?php
-									foreach ($types_depenses as $option) {
-										if($option->Nom_TypeDepense != 'avion' && $option->Nom_TypeDepense != 'sncf'){ //vérifie que le nom de la dépense n'est pas avion et sncf
-											echo "<option value=\"$option->Id_TypeDepense\">$option->Nom_TypeDepense</option>";
-										}
-										else{
-											echo "<option class='showInputText' value=\"$option->Id_TypeDepense\">$option->Nom_TypeDepense</option>";
-										}
-									}
-									?>
+									@foreach ($types_depenses as $option)
+										@if($option->Nom_TypeDepense != 'avion' && $option->Nom_TypeDepense != 'sncf') <!-- vérifie que le nom de la dépense n'est pas avion et sncf -->
+											<option value="{{ $option->Id_TypeDepense }}">{{ $option->Nom_TypeDepense }}</option>";
+										@else
+											<option class='showInputText' value="{{ $option->Id_TypeDepense }}">{{ $option->Nom_TypeDepense }}</option>
+										@endif
+									@endforeach
 								</select>
 							</div>
 							<div class="row justify-content-center mb-3">

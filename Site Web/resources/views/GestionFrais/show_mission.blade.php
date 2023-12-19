@@ -26,13 +26,23 @@
 							<div class="col-lg-3">
 								<div class="single_analite_content">
 									<h4>Total Frais</h4>
-									<h3>--</h3>
+									<h3>
+										{{ $frais->count() }}
+									</h3>
 								</div>
 							</div>
 							<div class="col-lg-3">
 								<div class="single_analite_content">
 									<h4>Frais totaux remboursés</h4>
-									<h3>--</h3>
+									<h3>
+										<?php
+											$nbfrais = 0;
+											foreach($frais as $unfrais) {
+												$nbfrais += $unfrais->Prix_Total;
+											}
+											echo $nbfrais . " €";
+										?>
+									</h3>
 								</div>
 							</div>
 							<div class="col-lg-3">
@@ -51,6 +61,8 @@
 					</div>
 				</div>
 			</div>
+			
+			<!-- tableau frais -->
 			<div class="col-xl-8">
 				<div class="white_card mb_30 card_height_100">
 					<div class="white_card_header ">
@@ -78,29 +90,20 @@
                               				</tr>
                            				</thead>
 										<tbody>
-											@foreach($frais as $unfrais)
+											@forelse($frais as $unfrais) <!-- forelse marche comme un foreach mais permet de dire quoi afficher si c'est vide -->
 											<tr>
-												<!-- <td scope="row">
-													<span class="sold-thumb"><i class="ti-arrow-up"></i></span>
-												</td>
-												<td>
-													<span class="badge bg-danger">Sold</span>
-												</td> -->
-												<!-- <td> <img class="small_img" src="img/currency/1.svg" alt=""> Bitcoin </td> -->
 												<td>{{ $unfrais->Intitule }}</td>
-												<td>{{ $unfrais->Date_Depense }}</td>l
+												<td>{{ $unfrais->Date_Depense }}</td>
 												<td>{{ $unfrais->Prix_Total }}</td>
 												<td>
-													<!-- <a href=""> 
-														<button type="button" class="btn btn-primary"><i class="fa-regular fa-eye fa-xs"></i></button>
-													</a> -->
-													
 													<a href="{{ route('GestionFrais.delete_frais', ['id' => $unfrais->Id_Frais]) }}"> 
 														<button type="button" class="btn btn-danger"><i class="fa-solid fa-trash fa-xs"></i></button>
 													</a>
                                  				</td>
 											</tr>
-											@endforeach
+											@empty <!-- affiche si il y a pas de résultat -->
+											<tr><td colspan="3" style="text-align:center">Aucun frais n'est disponible</td></tr>
+											@endforelse
 										</tbody>
 									</table>
 								</div>
@@ -109,6 +112,8 @@
 					</div>
 				</div>
 			</div>
+
+			<!-- tableau document -->
 			<div class="col-xl-4">
 				<div class="white_card card_height_100 mb_30">
 					<div class="white_card_header">
@@ -119,6 +124,29 @@
 						</div>
 					</div>
 					<div class="white_card_body">
+						<div class="table-responsive">
+							<table class="table">
+								<thead>
+                             		<th> Nom du fichier </th>
+									 <th> Télécharger </th>
+                           		</thead>
+								<tbody>
+									
+									@foreach($frais as $unfrais)
+									<tr>
+										<td>
+											{{ $unfrais->NomBase_Justificatif }}
+										</td>
+										<td> 
+											<a href="{{ route('GestionFrais.donwload_document', $unfrais->Id_Frais) }}" target="_blank">
+												<button type="button" class="btn btn-primary"><i class="fa-regular fa-eye fa-xs"></i></button>
+											</a>
+										</td>
+									</tr>
+									@endforeach
+								</tbody>
+							</table>
+						</div>
 					</div>
 				</div>
 			</div>

@@ -46,6 +46,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/mission/create/frais/{id_mission}',[GestionFraisController::class, 'show_create_frais'])->name('GestionFrais.show_create_frais');
     Route::post('/mission/create/frais',[GestionFraisController::class, 'create_frais'])->name('GestionFrais.create_frais');
     Route::get('/mission/delete/frais/{id}',[GestionFraisController::class, 'delete_frais'])->name('GestionFrais.delete_frais');
+    Route::get('/mission/frais/document/download/{id}',[GestionFraisController::class, 'donwload_document'])->name('GestionFrais.donwload_document');
     
 
 });
