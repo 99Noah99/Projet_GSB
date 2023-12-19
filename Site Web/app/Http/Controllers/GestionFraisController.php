@@ -64,7 +64,7 @@ class GestionFraisController extends Controller
 
     public function donwload_document($id){
         $frais = Frais::find($id);
-        return Storage::disk('public')->download($frais->Chemin, $frais->NomBase_Justificatif);
+        return Storage::disk('Justificatifs_Frais')->download($frais->Chemin, $frais->NomBase_Justificatif);
     }
 
     
