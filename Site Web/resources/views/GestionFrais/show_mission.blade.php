@@ -5,10 +5,14 @@
 		<div class="row">
 			<div class="col-12">
 				<div class="page_title_box d-flex flex-wrap align-items-center justify-content-between">
-					<div class="page_title_left">
+					<div class="page_title_left" style="display:flex">
 						<h3 class="mb-0">Mission : {{ $mission->Nom_Mission }}</h3>
+						<div style="margin-left:5px">
+							@if(isset($mission->dernier_historique_statut->statut->Id_Statut)) {!! \App\Http\Controllers\GestionMissionController::badge($mission->dernier_historique_statut->statut->Id_Statut) !!} @endif
+						</div>
 					</div>
 					<div class="page_title_right">
+					@role('utilisateur')	
 						@if ($mission->dernier_historique_statut->statut->Id_Statut == 3)
 						<form action="{{ route('GestionFrais.declare_mission') }}" method="post">
 							@csrf
@@ -16,6 +20,24 @@
 							<button type="submit" class="btn btn-primary">Déclarer la mission</button>
 						</form>
 						@endif
+					@endrole
+
+
+					@role('comptable')	
+						@if ($mission->dernier_historique_statut->statut->Id_Statut == 1)
+						<form action="{{ route('Comptable.valider_mission') }}" method="post" style="margin-right:15px">
+							@csrf
+							<input type="hidden" name="id" value="{{ $mission->Id_Mission }}">
+							<button type="submit" class="btn btn-success">Valider</button>
+						</form>
+
+						<form action="{{ route('Comptable.refuser_mission') }}" method="post">
+							@csrf
+							<input type="hidden" name="id" value="{{ $mission->Id_Mission }}">
+							<button type="submit" class="btn btn-danger">Refuser</button>
+						</form>
+						@endif
+					@endrole
 					</div>
 				</div>
 			</div>
@@ -66,11 +88,15 @@
 							<div class="main-title">
 								<h3 class="m-0">Mes Frais</h3>
 							</div>
+							@role('utilisateur')
+							@if($mission->dernier_historique_statut->statut->Id_Statut == 3)
 							<div class="page_title_right">
 								<a href="{{ route('GestionFrais.show_create_frais', ['id_mission' => $mission->Id_Mission]) }}">
 								<button type="submit" class="btn btn-primary"> Ajout d'un frais</button>
 								</a>
 							</div>
+							@endif
+							@endrole
 						</div>
 					</div>
 					<div class="white_card_body pt-0">

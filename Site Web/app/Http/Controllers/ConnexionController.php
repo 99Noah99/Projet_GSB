@@ -7,17 +7,28 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
+use Spatie\Permission\Models\Role;
 
 
 class ConnexionController extends Controller
 {
     public function connexion(){
+        
         $credentials = request()->only('username', 'password');
+        
         $auth = Auth::attempt($credentials, true);
         if ($auth) {
             Session::regenerate();
-            return redirect()->route('accueil');
-        }else{
+            $info_user = Auth::user();
+            if($info_user->Id_Fonction == 2){ //si c'est un utilisateur
+                //return dd('il est utilisateur');
+                return redirect()->route('accueil');
+            }
+            else{
+                return redirect()->route('accueil');
+            }         
+        }
+        else{
             return redirect()->route('login');
         }
     }
@@ -35,20 +46,21 @@ class ConnexionController extends Controller
 
 
     public function show_create_account(){
-        return view('create_account');
+        return view('create_account', ['roles' => Role::all(), 'fonctions' => \App\Models\Fonction::all()]);
     }
-
     
     public function create_account(){
-        // dd(request()->all());
-        User::create([
+        $user = User::create([
             "Nom" => request()->Nom,
             "Prenom" => request()->Prenom,
             "Email" => request()->mail,
             "username" => request()->username,
             "password" => Hash::make(request()->password),
-            "Id_Fonction" => 2
+            "Id_Fonction" => request()->id_fonction
         ]);
+
+        $role = Role::where('id', request()->id_role)->first();
+        $user->assignRole($role);
         return redirect()->route('login');
     }
     

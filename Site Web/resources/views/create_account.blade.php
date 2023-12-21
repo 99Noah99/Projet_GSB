@@ -20,26 +20,43 @@
 					<div class="modal-header justify-content-center theme_bg_1">
 						<h5 class="modal-title text_white">Register</h5>
 					</div>
-					<div class="modal-body">
+					<div class="card-body">
 						<form action="{{ route('create_account') }}"  method="post">
 							@csrf
-							<div class="">
+							<div class="mt-2">
 								<input type="text" name="Nom" class="form-control" placeholder="Entrer votre Nom">
 							</div>
-                            <div class="">
+                            <div class="mt-2">
 								<input type="text" name="Prenom" class="form-control" placeholder="Entrer votre Prénom">
 							</div>
-                            <div class="">
+                            <div class="mt-2">
 								<input type="text" name="mail" class="form-control" placeholder="Entrer votre Email">
 							</div>
-                            <div class="">
+                            <div class="mt-2">
 								<input type="text" name="username" class="form-control" placeholder="Créer votre identifiant de connexion">
 							</div>
-							<div class="">
+							<div class="mt-2">
 								<input type="password" name="password" class="form-control" placeholder="Créer votre mot de passe">
 							</div>
-                            
-							<button type="submit" class="btn_1 full_width text-center">Créer son compte</button>
+                            <div class="mt-2">
+                                <select name="id_fonction" class="form-select">
+                                    <option disabled>Choisir une fonction</option>
+                                    @foreach($fonctions as $fonction)
+                                        <option value="{{ $fonction->Id_Fonction }}">{{ $fonction->Nom_Fonction }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="mt-2">
+                                <select name="id_role" class="form-select">
+                                    <option disabled>Choisir une permission</option>
+                                    @foreach($roles as $role)
+                                        <option value="{{ $role->id }}">{{ $role->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+							<div class="mt-3 mx-auto w-1/2" style="width:50%">
+                                <button type="submit" class="btn_1 text-center" style="width:100%">Créer son compte</button>
+                            </div>
 						</form>
 					</div>
 				</div>

@@ -4,7 +4,7 @@
       <meta charset="utf-8" />
       <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
       <title>GSB</title>
-      <!-- <link rel="icon" href="img/mini_logo.png" type="image/png"> -->
+      <link rel="icon" href="{{ asset('images/favicon.png') }}" type="image/png">
       <link rel="stylesheet" href="{{ asset('css/bootstrap1.min.css') }}" />
       <link rel="stylesheet" href="{{ asset('css/themify-icons.css') }}" />
       <link rel="stylesheet" href="{{ asset('css/nice-select.css') }}" />
@@ -26,7 +26,7 @@
             border-radius: 10px;
          }
       </style>
-   </head>
+   </head>   
    <body class="crm_body_bg">
       @include('components.menu_gauche')
       <section class="main_content dashboard_part large_header_bg">

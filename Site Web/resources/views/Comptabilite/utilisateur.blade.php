@@ -7,7 +7,7 @@
             <div class="white_card card_height_100 mb_30">
                <div class="white_card_header pb-0">
                   <div class="white_box_tittle">
-                     <h4>Mes Missions</h4>
+                     <h4>Les visiteurs</h4>
                   </div>
                </div>
                <div class="white_card_body">
@@ -16,31 +16,22 @@
                         <table class="table lms_table_active2 ">
                            <thead>
                               <tr>
+                                 <th scope="col">Prenom</th>
                                  <th scope="col">Nom</th>
-                                 <th scope="col">Date Début</th>
-                                 <th scope="col">Date Fin</th>
-                                 <th scope="col">Ville</th>
-                                 <th scope="col">Statut de validation</th>
+                                 <th scope="col">Email</th>
                                  <th scope="col">Action</th>
                               </tr>
                            </thead>
                            <tbody >
-                            @foreach($missions as $mission)
+                            @foreach($utilisateurs as $utilisateur)
                               <tr style='font-size:2px!important'>
-                                 <td >{{ $mission->Nom_Mission }}</td>
-                                 <td>{{ \Carbon\Carbon::parse($mission->Date_Debut)->format('d/m/Y') }}</td>
-                                 <td>{{ \Carbon\Carbon::parse($mission->Date_Fin)->format('d/m/Y') }}</td>
-                                 <td>{{ $mission->ville->Nom_Ville }}</td>
-                                 <td>@if(isset($mission->dernier_historique_statut->statut->Id_Statut)) {!! \App\Http\Controllers\GestionMissionController::badge($mission->dernier_historique_statut->statut->Id_Statut) !!} @endif </td>
+                                 <td >{{ $utilisateur->Prenom }}</td>
+                                 <td>{{ $utilisateur->Nom }}</td>
+                                 <td>{{ $utilisateur->Email }}</td>
                                  <td>
-                                    <a href="{{ route('GestionFrais.show_mission', ['id' => $mission->Id_Mission]) }}"> 
+                                    <a href="{{ route('Comptable.show_ListeMission_ParVisiteur', ['id' => $utilisateur->Id_Utilisateur]) }}"> 
                                        <button type="button" class="btn btn-primary"><i class="fa-regular fa-eye fa-xs"></i></button>
                                     </a>
-                                    @role('utilisateur')
-                                    <a href="{{ route('GestionFrais.delete_mission', ['id' => $mission->Id_Mission]) }}"> 
-                                       <button type="button" class="btn btn-danger"><i class="fa-solid fa-trash fa-xs"></i></button>
-                                     </a>
-                                     @endrole
                                  </td>
                               </tr>
                               @endforeach

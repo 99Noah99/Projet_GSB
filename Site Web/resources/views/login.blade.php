@@ -40,11 +40,6 @@
 								<input type="password" name="password" class="form-control" placeholder="Mot de passe">
 							</div>
 							<button type="submit" class="btn_1 full_width text-center">Se connecter</button>
-							<p>
-								<a data-bs-toggle="modal" data-bs-target="#sing_up" data-bs-dismiss="modal" href="{{ route('show_create_account') }}"> 
-								Créer un compte
-								</a>
-							</p>
 						</form>
 					</div>
 				</div>

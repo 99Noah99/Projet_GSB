@@ -18,13 +18,6 @@ class GestionMissionController extends Controller
         ]);
     }
 
-    // public function show_ListeMission_ParVisiteur($id)
-    // {
-    //     $tous_missions = Mission::with('ville', 'dernier_historique_statut.statut','frais')->where('Id_Utilisateur',$id)->get();
-    //     return view('GestionFrais.show_liste_mission', [
-    //         'missions' => $tous_missions
-    //     ]);
-    // }
 
 
     public static function badge($statut) {
@@ -37,6 +30,10 @@ class GestionMissionController extends Controller
                 break;
             case 3 :
                 $badge = '<span class="badge bg-dark" style="font-size:12px">En attente de déclaration</span>';
+                break;
+
+            case 4 :
+                $badge = '<span class="badge bg-danger" style="font-size:12px">Refusée</span>';
                 break;
         }
 
