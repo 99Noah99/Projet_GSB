@@ -26,6 +26,7 @@
                            </thead>
                            <tbody >
                             @foreach($missions as $mission)
+                            @if($mission->dernier_historique_statut->statut->Id_Statut != 3 || auth()->user()->hasRole('comptable')== false)  <!-- permet de ne pas afficher les missions en attente de déclaratio au comptable -->
                               <tr style='font-size:2px!important'>
                                  <td >{{ $mission->Nom_Mission }}</td>
                                  <td>{{ \Carbon\Carbon::parse($mission->Date_Debut)->format('d/m/Y') }}</td>
@@ -43,6 +44,7 @@
                                      @endrole
                                  </td>
                               </tr>
+                              @endif
                               @endforeach
                            </tbody>
                         </table>

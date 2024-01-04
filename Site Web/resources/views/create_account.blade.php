@@ -24,19 +24,19 @@
 						<form action="{{ route('create_account') }}"  method="post">
 							@csrf
 							<div class="mt-2">
-								<input type="text" name="Nom" class="form-control" placeholder="Entrer votre Nom">
+								<input type="text" name="Nom" class="form-control" placeholder="Entrer le Nom">
 							</div>
                             <div class="mt-2">
-								<input type="text" name="Prenom" class="form-control" placeholder="Entrer votre Prénom">
+								<input type="text" name="Prenom" class="form-control" placeholder="Entrer le Prénom">
 							</div>
                             <div class="mt-2">
-								<input type="text" name="mail" class="form-control" placeholder="Entrer votre Email">
+								<input type="text" name="mail" class="form-control" placeholder="Entrer le Email">
 							</div>
                             <div class="mt-2">
-								<input type="text" name="username" class="form-control" placeholder="Créer votre identifiant de connexion">
+								<input type="text" name="username" class="form-control" placeholder="Créer l'identifiant de connexion">
 							</div>
 							<div class="mt-2">
-								<input type="password" name="password" class="form-control" placeholder="Créer votre mot de passe">
+								<input type="password" name="password" class="form-control" placeholder="Créer le mot de passe">
 							</div>
                             <div class="mt-2">
                                 <select name="id_fonction" class="form-select">

@@ -8,6 +8,7 @@ use App\Models\Historique_Statut;
 use App\Models\Ville;
 use App\Models\Frais;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Storage;
 
 class GestionMissionController extends Controller
 {
@@ -80,7 +81,10 @@ class GestionMissionController extends Controller
 
     public function recherche_ville(){
         $query = request()->q;
-        $recherche = Ville::where('Nom_Ville', 'LIKE', '%' . $query . '%')->limit(5)->get();
+        $recherche = Ville::where('Nom_Ville', 'LIKE', '%' . $query . '%')
+                            ->orWhere('Nom_Ville', 'LIKE', '%'.$query.'%')
+                            ->orderByRaw("CASE WHEN Nom_Ville = ? THEN 1 WHEN Nom_Ville LIKE ? THEN 2 ELSE 3 END", [$query, $query.'%'])
+                            ->limit(5)->get();
         $result = [];
         $result['results'] = [];
         
@@ -107,10 +111,19 @@ class GestionMissionController extends Controller
 
 
     public function delete_mission($id){
+        //suppression des statuts liés à la mission
         $historiques_statut = Historique_Statut::where('Id_Mission',$id)->get();
         foreach($historiques_statut as $historique_statut){
             $historique_statut->delete();
         }
+
+        //suppression des frais lié à la mission
+        $frais_missions = Frais::where('Id_Mission',$id)->get();
+        foreach($frais_missions as $frais_mission){
+            Storage::disk('Justificatifs_Frais')->delete($frais_mission->Chemin); // supprime le fichier du disk Justificatifs_Frais de laravel (voir config/filesystemes.php)
+            $frais_mission->delete();
+        }
+
         Mission::where('Id_Mission',$id)->forceDelete();
 
         return redirect()->back();

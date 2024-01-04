@@ -18,20 +18,20 @@
                <div class="white_card_body">
                   <div class="mb-3">
                       <label class="form-label">Nom de la mission</label>
-                      <input type="text" name='Nom_Mission' class="form-control" placeholder="Nom de la mission">
+                      <input type="text" name='Nom_Mission' class="form-control" placeholder="Nom de la mission" required>
                   </div>
                   <div class="mb-3">
                       <label class="form-label">Date début</label>
-                      <input type="date" name='Date_Debut' class="form-control" placeholder="Date de début">
+                      <input type="date" name='Date_Debut' min="1979-12-31" min="9999-12-31" class="form-control" placeholder="Date de début" required>
                   </div>
                   <div class="mb-3">
                      <label class="form-label">Date de fin</label>
-                     <input type="date" name='Date_Fin' class="form-control" placeholder="Date de fin">
+                     <input type="date" name='Date_Fin' min="1979-12-31" min="9999-12-31" class="form-control" placeholder="Date de fin" required>
                   </div>
                   
                   <div class="mb-3">
                         <label class="form-label">Ville</label>
-                        <select id="single" name='Ville' class="js-states form-control">
+                        <select id="single" name='Ville' class="js-states form-control" required>
                         </select>             
                   </div>
                   <button type="submit" class="btn btn-primary">Ajouter</button>
@@ -41,6 +41,7 @@
          </div>
       </div>
    </div>
+   
    <script>
     $('#single').select2({
         placeholder: "Selectionner une ville",

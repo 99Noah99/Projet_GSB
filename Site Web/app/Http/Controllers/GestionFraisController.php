@@ -34,7 +34,7 @@ class GestionFraisController extends Controller
         $file = request()->fichier;
         $originalName = $file->getClientOriginalName();
         $extension = $file->getClientOriginalExtension();
-        $filePath = $file->store('/', 'Justificatifs_Frais');
+        $filePath = $file->store('/', 'Justificatifs_Frais'); // on store le fichier dans le disk Justificatifs_Frais (voir config/filesystemes.php) avec un nom aléatoire unique
         $randomName= pathinfo($filePath, PATHINFO_FILENAME);
 
         Frais::create([
@@ -45,7 +45,7 @@ class GestionFraisController extends Controller
             "Id_Mission" => request()->id_mission,
             "Id_TypeDepense" => request()->select_TypeDepense,
             "NomBase_Justificatif" => $originalName,
-            "NouveauNom_Justificatif" => $randomName,
+            "NouveauNom_Justificatif" => $randomName ,
             "Extensions" => $extension,
             "Chemin" => $filePath,          
         ]);
@@ -55,8 +55,7 @@ class GestionFraisController extends Controller
 
     public function delete_frais($id){
         $frais = Frais::find($id);
-        // dd($frais);
-        Storage::disk('public')->delete($frais->Chemin);
+        Storage::disk('Justificatifs_Frais')->delete($frais->Chemin);  //fichier stocker sur le disque Justificatifs_Frais de laravel (voir config/filesystemes.php)
         $frais->delete();
         return redirect()->back();
     }

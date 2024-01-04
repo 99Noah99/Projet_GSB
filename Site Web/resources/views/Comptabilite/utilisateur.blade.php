@@ -19,17 +19,20 @@
                                  <th scope="col">Prenom</th>
                                  <th scope="col">Nom</th>
                                  <th scope="col">Email</th>
+                                 <th scope="col">Nombre mission(s)</th>
                                  <th scope="col">Action</th>
                               </tr>
                            </thead>
                            <tbody >
-                            @foreach($utilisateurs as $utilisateur)
+                            @foreach($tab_infos_users as $tab_info_user)
                               <tr style='font-size:2px!important'>
-                                 <td >{{ $utilisateur->Prenom }}</td>
-                                 <td>{{ $utilisateur->Nom }}</td>
-                                 <td>{{ $utilisateur->Email }}</td>
+                              
+                                 <td >{{ $tab_info_user[0]->Prenom }}</td>
+                                 <td>{{ $tab_info_user[0]->Nom }}</td>
+                                 <td>{{ $tab_info_user[0]->Email }}</td>
+                                 <td>{{ $tab_info_user[1] }}</td>
                                  <td>
-                                    <a href="{{ route('Comptable.show_ListeMission_ParVisiteur', ['id' => $utilisateur->Id_Utilisateur]) }}"> 
+                                    <a href="{{ route('Comptable.show_ListeMission_ParVisiteur', ['id' => $tab_info_user[0]->Id_Utilisateur]) }}"> 
                                        <button type="button" class="btn btn-primary"><i class="fa-regular fa-eye fa-xs"></i></button>
                                     </a>
                                  </td>

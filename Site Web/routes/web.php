@@ -69,10 +69,11 @@ Route::middleware('auth')->group(function () {
     //----------------------------- GESTION COMPTABLE
 
     Route::middleware('role:comptable')->group(function () {
-        Route::get('/visiteur/list', [ComptableController::class, 'show_ListeVisiteur'])->name('Comptable.show_ListeVisiteur');
+        Route::get('/visiteur/liste', [ComptableController::class, 'show_ListeVisiteur'])->name('Comptable.show_ListeVisiteur');
         Route::get('/mission/liste/{id}', [ComptableController::class, 'show_ListeMission_ParVisiteur'])->name('Comptable.show_ListeMission_ParVisiteur');
         Route::post('/comptable/mission/valider', [ComptableController::class, 'valider_mission'])->name('Comptable.valider_mission');
         Route::post('/comptable/mission/refuser', [ComptableController::class, 'refuser_mission'])->name('Comptable.refuser_mission');
     });
 
 });
+

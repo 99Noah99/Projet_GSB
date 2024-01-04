@@ -115,12 +115,14 @@
 											@forelse($frais as $unfrais) <!-- forelse marche comme un foreach mais permet de dire quoi afficher si c'est vide -->
 											<tr>
 												<td>{{ $unfrais->Intitule }}</td>
-												<td>{{ $unfrais->Date_Depense }}</td>
+												<td>{{ \Carbon\Carbon::parse($unfrais->Date_Depense)->format('d/m/Y') }}</td>
 												<td>{{ number_format($unfrais->Prix_Total, 2, ',', ' ') . ' €' }}</td>
 												<td>
+													@role('utilisateur')
 													<a href="{{ route('GestionFrais.delete_frais', ['id' => $unfrais->Id_Frais]) }}"> 
 														<button type="button" class="btn btn-danger"><i class="fa-solid fa-trash fa-xs"></i></button>
 													</a>
+													@endrole
                                  				</td>
 											</tr>
 											@empty <!-- affiche si il y a pas de résultat -->
@@ -162,7 +164,7 @@
 										</td>
 										<td> 
 											<a href="{{ route('GestionFrais.donwload_document', $unfrais->Id_Frais) }}" target="_blank">
-												<button type="button" class="btn btn-primary"><i class="fa-regular fa-eye fa-xs"></i></button>
+												<button type="button" class="btn btn-primary"><i class="fa-solid fa-download"></i></button>
 											</a>
 										</td>
 									</tr>
