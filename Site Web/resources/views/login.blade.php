@@ -4,7 +4,7 @@
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<title>GSB</title>
-		<link rel="icon" href="img/mini_logo.png" type="image/png">
+		<link rel="icon" href="{{ asset('img/mini_logo.png') }}" type="image/png">
 		<link rel="stylesheet" href="{{ asset('css/bootstrap1.min.css') }}" />
 		<link rel="stylesheet" href="{{ asset('css/themify-icons.css') }}" />
 		<!-- <link rel="stylesheet" href="{{ asset('css/nice-select.css') }}" />

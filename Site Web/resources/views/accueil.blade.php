@@ -38,6 +38,10 @@
                     </a>
                     @endrole
                 </div>
+
+                <div style="margin-top: 10%; ">
+                    <img src="{{ asset('images/imgGestionFrais.jpg') }}" alt="Gestion des frais" style="border-radius : 20px !important; overflow: hidden !important;">
+                </div>
 			</div>
 		</div>
 	</div>

@@ -20,8 +20,7 @@ class ConnexionController extends Controller
         if ($auth) {
             Session::regenerate();
             $info_user = Auth::user();
-            if($info_user->Id_Fonction == 2){ //si c'est un utilisateur
-                //return dd('il est utilisateur');
+            if($info_user->Id_Fonction == 2){ 
                 return redirect()->route('accueil');
             }
             else{

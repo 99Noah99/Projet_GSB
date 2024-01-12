@@ -7,7 +7,7 @@
 				<div class="page_title_box d-flex flex-wrap align-items-center justify-content-between">
 					<div class="page_title_left" style="display:flex">
 						<h3 class="mb-0">Mission : {{ $mission->Nom_Mission }}</h3>
-						<div style="margin-left:5px">
+						<div style="margin-left:1em; margin-top:0.3em">
 							@if(isset($mission->dernier_historique_statut->statut->Id_Statut)) {!! \App\Http\Controllers\GestionMissionController::badge($mission->dernier_historique_statut->statut->Id_Statut) !!} @endif
 						</div>
 					</div>
@@ -118,13 +118,16 @@
 												<td>{{ \Carbon\Carbon::parse($unfrais->Date_Depense)->format('d/m/Y') }}</td>
 												<td>{{ number_format($unfrais->Prix_Total, 2, ',', ' ') . ' €' }}</td>
 												<td>
-													@role('utilisateur')
+													@role('utilisateur')	
+													@if($mission->dernier_historique_statut->statut->Id_Statut == 3)
 													<a href="{{ route('GestionFrais.delete_frais', ['id' => $unfrais->Id_Frais]) }}"> 
 														<button type="button" class="btn btn-danger"><i class="fa-solid fa-trash fa-xs"></i></button>
 													</a>
+													@endif
 													@endrole
                                  				</td>
 											</tr>
+
 											@empty <!-- affiche si il y a pas de résultat -->
 											<tr><td colspan="3" style="text-align:center">Aucun frais n'est disponible</td></tr>
 											@endforelse
@@ -151,7 +154,7 @@
 						<div class="table-responsive">
 							<table class="table">
 								<thead>
-                             		<th> Nom du fichier </th>
+                             		<th> Nom du justificatif </th>
 									 <th> Télécharger </th>
                            		</thead>
 								<tbody>

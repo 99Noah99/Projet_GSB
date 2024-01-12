@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Storage;
 class GestionMissionController extends Controller
 {
     public function show_ListeMission() {
-        $tous_missions = Mission::with('ville', 'dernier_historique_statut.statut','frais')->where('Id_Utilisateur',auth()->user()->Id_Utilisateur)->get();
+        $tous_missions = Mission::with('ville', 'dernier_historique_statut.statut','frais')->where('Id_Utilisateur',auth()->user()->Id_Utilisateur)->orderBy('created_at', 'DESC')->get();
         return view('GestionFrais.show_liste_mission', [
             'missions' => $tous_missions
         ]);
@@ -59,7 +59,7 @@ class GestionMissionController extends Controller
         ]);
         Historique_Statut::create([
             "Id_Mission" => $create_mission->Id_Mission,
-            "Id_Statut" => 3,
+            "Id_Statut" => 3, //en attente de déclaration
             "Date_Changement" => Carbon::now()
         ]);
         return redirect()->route('GestionFrais.show_mission',['id' => $create_mission->Id_Mission]);

@@ -22,7 +22,7 @@ use Spatie\Permission\Models\Permission;
 
 
     // ---------------------------- CONNEXION
-
+Route::get('/', [ConnexionController::class, 'show_login'])->name('login');
 Route::get('/login', [ConnexionController::class, 'show_login'])->name('login');
 Route::post('/make-login', [ConnexionController::class, 'connexion'])->name('submit_login');
 Route::get('/Create/account',[ConnexionController::class,'show_create_account'])->name('show_create_account')->middleware('role:admin');//middleware('role:admin|utilisateur')

@@ -66,16 +66,6 @@ class GestionFraisController extends Controller
         return Storage::disk('Justificatifs_Frais')->download($frais->Chemin, $frais->NomBase_Justificatif);
     }
 
-    
-    //Exemple pour gérer la fermuture ajout frais le 20 du mois.
-    // create(){
-    //     $mission_month = Carbon::($mission->created_at)->month;
-    //     $month_now = Carbon::now()->month;
-
-    //     if($month_now != $mission_month && Carbon::now()->day > 20){
-    //         return false;
-    //     }
-    // }
 }
 
 
