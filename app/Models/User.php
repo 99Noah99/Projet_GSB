@@ -18,7 +18,7 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
-    protected $guarded = []; // Ne proège aucune colonne, permet le create
+    protected $guarded = []; // Ne protège aucune colonne, permet le create
     
     // protected $fillable = [
     //     'name',
