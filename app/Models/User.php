@@ -11,7 +11,7 @@ use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable ,HasRoles;
+    use HasApiTokens, HasFactory, Notifiable, HasRoles;
 
     /**
      * The attributes that are mass assignable.
@@ -19,13 +19,13 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $guarded = []; // Ne protège aucune colonne, permet le create
-    
+
     // protected $fillable = [
     //     'name',
     //     'email',
     //     'password',
     // ];
-    
+
     /**
      * The attributes that should be hidden for serialization.
      *
@@ -48,7 +48,18 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
-    public function fonction(){        
+    public function username()
+    {
+        return 'Identifiant';
+    }
+
+    public function fonction()
+    {
         return $this->hasOne(Fonction::class, 'Id_Fonction', 'Id_Fonction');
+    }
+
+    public function getMissions()
+    {
+        return $this->hasMany(Mission::class, 'Id_Utilisateur', 'Id_Utilisateur');
     }
 }

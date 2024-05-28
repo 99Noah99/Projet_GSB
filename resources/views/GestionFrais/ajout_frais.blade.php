@@ -12,29 +12,29 @@
 							</div>
 						</div>
 					</div>
-                    <form action=" {{ route('GestionFrais.create_frais') }} " method="post" enctype="multipart/form-data">
-                        @csrf
-                        <div class="white_card_body">
-                            <h6 class="card-subtitle mb-2">Veuillez remplir les informations :</h6><br>
-                            <div class="mb-3">
-                                <label class="form-label">Intitulé du frais</label>
-                                <input type="text" name='Intitule' class="form-control" placeholder="Intitulé du frais" required>
-                            </div>
+					<form action=" {{ route('GestionFrais.create_frais') }} " method="post" enctype="multipart/form-data">
+						@csrf
+						<div class="white_card_body">
+							<h6 class="card-subtitle mb-2">Veuillez remplir les informations :</h6><br>
+							<div class="mb-3">
+								<label class="form-label">Intitulé du frais</label>
+								<input type="text" name='Intitule' class="form-control" placeholder="Intitulé du frais" required>
+							</div>
 							<div class="mb-3">
 								<label class="form-label">Date de dépense</label>
-								<input type="date" name='Date_Depense' class="form-control" placeholder="Date de dépense" required>
+								<input type="date" max="9999-12-31" name='Date_Depense' class="form-control" placeholder="Date de dépense" required>
 							</div>
 
 							<div class="mb-3">
 								<label class="form-label">Type de dépense</label>
-								<select  class="form-select" name="select_TypeDepense" id="selectOption" required>
+								<select class="form-select" name="select_TypeDepense" id="selectOption" required>
 									<option value="" disabled selected>Choisir son type de dépense</option>
 									@foreach ($types_depenses as $option)
-										@if($option->Nom_TypeDepense != 'avion' && $option->Nom_TypeDepense != 'sncf') <!-- vérifie que le nom de la dépense n'est pas avion et sncf -->
-											<option value="{{ $option->Id_TypeDepense }}">{{ $option->Nom_TypeDepense }}</option>";
-										@else
-											<option class='showInputText' value="{{ $option->Id_TypeDepense }}">{{ $option->Nom_TypeDepense }}</option>
-										@endif
+									@if($option->Nom_TypeDepense != 'avion' && $option->Nom_TypeDepense != 'sncf') <!-- vérifie que le nom de la dépense n'est pas avion et sncf -->
+									<option value="{{ $option->Id_TypeDepense }}">{{ $option->Nom_TypeDepense }}</option>";
+									@else
+									<option class='showInputText' value="{{ $option->Id_TypeDepense }}">{{ $option->Nom_TypeDepense }}</option>
+									@endif
 									@endforeach
 								</select>
 							</div>
@@ -43,24 +43,24 @@
 									<label class="form-label">Montant</label>
 									<input type="text" name='Montant' class="form-control" placeholder=" Montant du frais">
 								</div>
-								<div class="col-lg-2"> 		
+								<div class="col-lg-2">
 									<label class="form-label">Quantité</label>
 									<input type="number" class="form-control" name="Quantite" id="inputNumber" value="1">
 								</div>
-                            </div>
+							</div>
 
 							<!-- ajout du fichier -->
 							<div class="mb-3">
 								<input type="file" class="form-control" name="fichier" id="inputGroupFile02" required>
 							</div>
-									
+
 							<!-- input pour l'id mission -->
 							<!--la variable id_mission correspond a la mission a laquelle on veut ajouter le frais, celle a été transférer de la page show_mission a ici via l'url -->
-							 <input type="hidden" name="id_mission" value="{{ $id_mission }}"> 
-							
-                  			<button type="submit" class="btn btn-primary w-100">Ajouter</button>
+							<input type="hidden" name="id_mission" value="{{ $id_mission }}">
+
+							<button type="submit" class="btn btn-primary w-100">Ajouter</button>
 						</div>
-                    </form>
+					</form>
 				</div>
 			</div>
 		</div>
@@ -70,22 +70,22 @@
 
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <script>
-    $(document).ready(function () {
-        // Cacher l'input text au chargement de la page
-        $('.inputTextToShow').hide();
+	$(document).ready(function() {
+		// Cacher l'input text au chargement de la page
+		$('.inputTextToShow').hide();
 
-        // Détecter le changement dans le menu déroulant
-        $('#selectOption').change(function () {
-            // Vérifier si l'option sélectionnée a la classe "showInputText"
-            if ($(this).find('option:selected').hasClass('showInputText')) {
-                // Afficher l'input text
-                $('.inputTextToShow').show();
-            } else {
-                // Cacher l'input text
-                $('.inputTextToShow').hide();
-            }
-        });
-    });
+		// Détecter le changement dans le menu déroulant
+		$('#selectOption').change(function() {
+			// Vérifier si l'option sélectionnée a la classe "showInputText"
+			if ($(this).find('option:selected').hasClass('showInputText')) {
+				// Afficher l'input text
+				$('.inputTextToShow').show();
+			} else {
+				// Cacher l'input text
+				$('.inputTextToShow').hide();
+			}
+		});
+	});
 </script>
 
 

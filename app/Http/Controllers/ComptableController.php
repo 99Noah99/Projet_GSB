@@ -2,63 +2,51 @@
 
 namespace App\Http\Controllers;
 
+use App\Services\UserService;
+use App\Services\MissionService;
+use App\Services\HistoriqueStatutService;
 use Illuminate\Http\Request;
-use App\Models\User;
-use App\Models\Mission;
-use App\Models\Historique_Statut;
-use Carbon\Carbon;
 
 class ComptableController extends Controller
 {
+    protected $userService;
+    protected $missionService;
+    protected $historiqueStatutService;
+
+    public function __construct(
+        UserService $userService,
+        MissionService $missionService,
+        HistoriqueStatutService $historiqueStatutService
+    ) {
+        $this->userService = $userService;
+        $this->missionService = $missionService;
+        $this->historiqueStatutService = $historiqueStatutService;
+    }
+
     public function show_ListeVisiteur()
     {
-        $tab_infos_users = [];
-        $utilisateurs = User::where('Id_Fonction', 2)->get(); //2 = fontion utilisateur
-        foreach($utilisateurs as $utilisateur){
-            $nb_mission = Mission::with('dernier_historique_statut')
-            ->where('Id_Utilisateur', $utilisateur->Id_Utilisateur)
-            ->whereHas('dernier_historique_statut', function ($sql) {
-                $sql->where('Id_Statut', '!=', 3); //pas égale au statut En attente de déclaration
-             }) 
-            ->count();
-            array_push($tab_infos_users, [$utilisateur,$nb_mission]);
-
-        }
+        $tab_infos_users = $this->userService->getUsersWithMissionCount(2);
         return view('Comptabilite.utilisateur', ['tab_infos_users' => $tab_infos_users]);
     }
 
-    // public function Nombre_mission($id_utilisateur)
-    // {
-    //     Mission::where('Id_Utilisateur', $utilisateur->Id_Utilisateur)->count();
-    //     return ;
-    // }
-    
-    public function show_ListeMission_ParVisiteur($id)
+    public function show_ListeMission_ParVisiteur($id) //mission(s) du visiteur vue par le comptable lorsqu'il a cliquer sur un utilisateur
     {
-        $tous_missions = Mission::with('ville', 'dernier_historique_statut.statut','frais')->where('Id_Utilisateur',$id)->get();
+        $tous_missions = $this->missionService->getMissionsByUser($id);
+        $userInfo = $this->userService->getUserById($id);
         return view('GestionFrais.show_liste_mission', [
-            'missions' => $tous_missions
+            'missions' => $tous_missions, 'userInfo' => $userInfo
         ]);
     }
 
-    public function valider_mission(){
-        Historique_Statut::create([
-            "Id_Mission" => request()->id,
-            "Id_Statut" => 2,
-            "Date_Changement" => Carbon::now()
-        ]);
-
+    public function valider_mission(Request $request)
+    {
+        $this->historiqueStatutService->changeMissionStatus($request->id, 2);
         return redirect()->back();
     }
 
-    public function refuser_mission(){
-        Historique_Statut::create([
-            "Id_Mission" => request()->id,
-            "Id_Statut" => 4,
-            "Date_Changement" => Carbon::now()
-        ]);
-
+    public function refuser_mission(Request $request)
+    {
+        $this->historiqueStatutService->changeMissionStatus($request->id, 4);
         return redirect()->back();
     }
-
 }

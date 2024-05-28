@@ -15,14 +15,14 @@ return new class extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->id('Id_Utilisateur');
             $table->string('Nom', 30);
-            $table->string('Prenom',30);
-            $table->string('Email',100)->unique();
-            $table->string('Identifiant',20);
-            $table->string('Mdp');
+            $table->string('Prenom', 30);
+            $table->string('Email', 100)->unique();
+            $table->string('username', 20);
+            $table->string('password');
             $table->foreignId('Id_Fonction')->foreign()->references('Id_Fonction')->on('fonction');
-            $table->string('remember_token',255)->nullable();
+            $table->string('remember_token', 255)->nullable();
             $table->timestamps();
-        });    
+        });
         Schema::enableForeignKeyConstraints();
     }
 

@@ -12,21 +12,30 @@ class Mission extends Model
     protected $table = 'mission';
     protected $primaryKey = 'Id_Mission';
     protected $guarded = []; // Ne proège aucune colonne, permet le create
-    protected $dates = ['Date_Debut','Date_Fin'];
+    protected $dates = ['Date_Debut', 'Date_Fin'];
 
-    public function ville() {
+    public function ville()
+    {
         return $this->hasOne(Ville::class, 'Id_Ville', 'Id_Ville');
     }
 
-    public function frais() {                
+    public function frais()
+    {
         return $this->hasMany(Frais::class, 'Id_Frais', 'Id_Frais');
     }
 
-    public function historique_statut() {                // jointure avec table historique_statut retourne tout les enregistrements
+    public function historique_statut()
+    {                // jointure avec table historique_statut retourne tout les enregistrements
         return $this->hasMany(Historique_Statut::class, 'Id_Mission', 'Id_Mission');
     }
 
-    public function dernier_historique_statut(){        // jointure avec historique_statut et récupère que le dernier enregistrement 
+    public function dernier_historique_statut()
+    {        // jointure avec historique_statut et récupère que le dernier enregistrement 
         return $this->hasOne(Historique_Statut::class, 'Id_Mission', 'Id_Mission')->latest('Date_Changement');
     }
+
+    // public function getDernierStatut()
+    // {        // jointure avec historique_statut et récupère que le dernier enregistrement 
+    //     return $this->hasOne(Historique_Statut::class, 'Id_Mission', 'Id_Mission')->latest('Date_Changement');
+    // }
 }

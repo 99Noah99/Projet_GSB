@@ -1,13 +1,18 @@
 @extends('layout.app')
 @section('contenu')
 <div class="main_content_iner overly_inner ">
-   <div class="container-fluid p-0 border-gris" >
+   <div class="container-fluid p-0 border-gris">
       <div class="row">
          <div class="col-lg-12">
             <div class="white_card card_height_100 mb_30">
                <div class="white_card_header pb-0">
                   <div class="white_box_tittle">
+                     @role('utilisateur')
                      <h4>Mes Missions</h4>
+                     @endrole
+                     @role('comptable')
+                     <h4>Les missions de : {{ $userInfo->Nom }} {{ $userInfo->Prenom }}</h4>
+                     @endrole
                   </div>
                </div>
                <div class="white_card_body">
@@ -25,25 +30,25 @@
                                  <th scope="col">Action</th>
                               </tr>
                            </thead>
-                           <tbody >
-                            @foreach($missions as $mission)
-                            @if($mission->dernier_historique_statut->statut->Id_Statut != 3 || auth()->user()->hasRole('comptable')== false)  <!-- permet de ne pas afficher les missions en attente de déclaratio au comptable -->
+                           <tbody>
+                              @foreach($missions as $mission)
+                              @if($mission->dernier_historique_statut->statut->Id_Statut != 3 || auth()->user()->hasRole('comptable')== false) <!-- permet de ne pas afficher les missions en attente de déclaratio au comptable -->
                               <tr style='font-size:2px!important'>
-                                 <td >{{ $mission->Nom_Mission }}</td>
+                                 <td>{{ $mission->Nom_Mission }}</td>
                                  <td>{{ \Carbon\Carbon::parse($mission->created_at)->format('d/m/Y') }}</td>
                                  <td>{{ \Carbon\Carbon::parse($mission->Date_Debut)->format('d/m/Y') }}</td>
                                  <td>{{ \Carbon\Carbon::parse($mission->Date_Fin)->format('d/m/Y') }}</td>
                                  <td>{{ $mission->ville->Nom_Ville }}</td>
                                  <td>@if(isset($mission->dernier_historique_statut->statut->Id_Statut)) {!! \App\Http\Controllers\GestionMissionController::badge($mission->dernier_historique_statut->statut->Id_Statut) !!} @endif </td>
                                  <td>
-                                    <a href="{{ route('GestionFrais.show_mission', ['id' => $mission->Id_Mission]) }}"> 
+                                    <a href="{{ route('GestionFrais.show_mission', ['id' => $mission->Id_Mission]) }}">
                                        <button type="button" class="btn btn-primary"><i class="fa-regular fa-eye fa-xs"></i></button>
                                     </a>
                                     @role('utilisateur')
-                                    <a href="{{ route('GestionFrais.delete_mission', ['id' => $mission->Id_Mission]) }}"> 
+                                    <a href="{{ route('GestionFrais.delete_mission', ['id' => $mission->Id_Mission]) }}">
                                        <button type="button" class="btn btn-danger"><i class="fa-solid fa-trash fa-xs"></i></button>
-                                     </a>
-                                     @endrole
+                                    </a>
+                                    @endrole
                                  </td>
                               </tr>
                               @endif

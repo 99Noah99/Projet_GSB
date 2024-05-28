@@ -14,12 +14,11 @@ return new class extends Migration
         Schema::disableForeignKeyConstraints();
         Schema::create('type_depense', function (Blueprint $table) {
             $table->id('Id_TypeDepense');
-            $table->string('Nom_TypeDepense',50);
+            $table->string('Nom_TypeDepense', 50);
             $table->decimal('Prix_unite', $precision = 6, $scale = 2);
-            $table->string('Mode_Calcule',20);
             $table->timestamps();
-        });     
-           Schema::enableForeignKeyConstraints();
+        });
+        Schema::enableForeignKeyConstraints();
     }
 
     /**
